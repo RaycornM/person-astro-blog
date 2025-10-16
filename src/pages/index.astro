@@ -39,7 +39,7 @@ const [latestPost, ...otherPosts] = sortedPosts.slice(0, 3);
 			 <IntroCard title="マスカレード" description="…ようこそ。新日暮里の世界へ" />
 
             <section>
-                <h2>最新文章</h2>
+                <h2 class="latest-post">最新文章</h2>
                 {latestPost && (
                     <a href={latestPost.url} class="post-card featured">
                         <img 
@@ -49,7 +49,7 @@ const [latestPost, ...otherPosts] = sortedPosts.slice(0, 3);
                             class="post-image"
                         />
                         <div style="padding: 2rem;">
-                            <h3 style="margin-top: 0;">{latestPost.frontmatter.title}</h3>
+                            <h3 style="margin-top: 0;font-family: 'SmileySans-Oblique';">{latestPost.frontmatter.title}</h3>
                             <p style="color: #888;">{new Date(latestPost.frontmatter.pubDate).toLocaleDateString()}</p>
                             <p>{latestPost.frontmatter.description}</p>
                         </div>
@@ -65,7 +65,7 @@ const [latestPost, ...otherPosts] = sortedPosts.slice(0, 3);
                                 class="post-image"
                             />
                             <div style="padding: 1.5rem;">
-                                <h3 style="margin-top: 0;">{post.frontmatter.title}</h3>
+                                <h3 style="margin-top: 0;font-family: 'SmileySans-Oblique';">{post.frontmatter.title}</h3>
                                 <p style="color: #888;">{new Date(post.frontmatter.pubDate).toLocaleDateString()}</p>
                                 <p>{post.frontmatter.description}</p>
                             </div>
