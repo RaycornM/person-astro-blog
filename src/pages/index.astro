@@ -41,11 +41,12 @@ const [latestPost, ...otherPosts] = sortedPosts.slice(0, 3);
             <section>
                 <h2>最新文章</h2>
                 {latestPost && (
-                    <a href={latestPost.url} style="display: block; background: #fff; border-radius: 1rem; box-shadow: 0 4px 16px rgba(0,0,0,0.10); padding: 0; margin-bottom: 2rem; text-decoration: none; color: inherit; overflow: hidden;">
+                    <a href={latestPost.url} class="post-card featured">
                         <img 
                             src={latestPost.frontmatter.heroImage || '/assets/blog-placeholder-about.jpg'} 
                             alt={latestPost.frontmatter.title} 
                             style="width: 100%; height: 220px; object-fit: cover; display: block; border-top-left-radius: 1rem; border-top-right-radius: 1rem;"
+                            class="post-image"
                         />
                         <div style="padding: 2rem;">
                             <h3 style="margin-top: 0;">{latestPost.frontmatter.title}</h3>
@@ -54,13 +55,14 @@ const [latestPost, ...otherPosts] = sortedPosts.slice(0, 3);
                         </div>
                     </a>
                 )}
-                <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+                <div class="post-row">
                     {otherPosts.map(post => (
-                        <a href={post.url} style="flex: 1 1 250px; background: #fff; border-radius: 1rem; box-shadow: 0 4px 16px rgba(0,0,0,0.10); padding: 0; text-decoration: none; color: inherit; overflow: hidden;">
+                        <a href={post.url} class="post-card">
                             <img 
                                 src={post.frontmatter.heroImage || '/assets/blog-placeholder-about.jpg'} 
                                 alt={post.frontmatter.title} 
                                 style="width: 100%; height: 140px; object-fit: cover; display: block; border-top-left-radius: 1rem; border-top-right-radius: 1rem;"
+                                class="post-image"
                             />
                             <div style="padding: 1.5rem;">
                                 <h3 style="margin-top: 0;">{post.frontmatter.title}</h3>
@@ -75,3 +77,47 @@ const [latestPost, ...otherPosts] = sortedPosts.slice(0, 3);
 		<Footer />
 	</body>
 </html>
+
+<style>
+.post-card {
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+    padding: 0;
+    text-decoration: none;
+    color: inherit;
+    overflow: hidden;
+    transition: transform 0.2s cubic-bezier(.4,2,.6,1), box-shadow 0.2s;
+    will-change: transform, box-shadow;
+    display: block;
+}
+.post-card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    z-index: 1;
+}
+.post-card:hover .post-image {
+    transform: scale(1.06) rotate(-1deg);
+}
+.post-card.featured {
+    margin-bottom: 2rem;
+}
+.post-row {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.post-row .post-card {
+    flex: 1 1 300px;
+    max-width: 48%;
+}
+@media (max-width: 800px) {
+    .post-row {
+        flex-direction: column;
+    }
+    .post-row .post-card {
+        max-width: 100%;
+    }
+}
+</style>
