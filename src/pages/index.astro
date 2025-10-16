@@ -4,6 +4,7 @@ import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import IntroCard from '../components/IntroCard.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { getCollection } from 'astro:content';
 
 // Use import.meta.glob for blog posts
 type Post = {
@@ -16,10 +17,9 @@ type Post = {
   };
 };
 
-const postImports = import.meta.glob<Post>('../content/blog/*.md', { eager: true });
-const allPosts = Object.values(postImports) as Post[];
-const sortedPosts = allPosts
-  .sort((a, b) => new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime());
+const posts = await getCollection('blog');
+const sortedPosts = posts
+  .sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime());
 const [latestPost, ...otherPosts] = sortedPosts.slice(0, 3);
 ---
 
@@ -41,33 +41,45 @@ const [latestPost, ...otherPosts] = sortedPosts.slice(0, 3);
             <section>
                 <h2 class="latest-post">最新文章</h2>
                 {latestPost && (
-                    <a href={latestPost.url} class="post-card featured">
+                    <a href={`/blog/${latestPost.id}/`} class="post-card featured">
                         <img 
-                            src={latestPost.frontmatter.heroImage || '/assets/blog-placeholder-about.jpg'} 
-                            alt={latestPost.frontmatter.title} 
+                            src={
+                                latestPost.data.heroImage
+                                    ? typeof latestPost.data.heroImage === 'string'
+                                        ? latestPost.data.heroImage
+                                        : latestPost.data.heroImage.src
+                                    : '/assets/blog-placeholder-about.jpg'
+                            }
+                            alt={latestPost.data.title} 
                             style="width: 100%; height: 220px; object-fit: cover; display: block; border-top-left-radius: 1rem; border-top-right-radius: 1rem;"
                             class="post-image"
                         />
                         <div style="padding: 2rem;">
-                            <h3 style="margin-top: 0;font-family: 'SmileySans-Oblique';">{latestPost.frontmatter.title}</h3>
-                            <p style="color: #888;">{new Date(latestPost.frontmatter.pubDate).toLocaleDateString()}</p>
-                            <p>{latestPost.frontmatter.description}</p>
+                            <h3 style="margin-top: 0;font-family: 'SmileySans-Oblique';">{latestPost.data.title}</h3>
+                            <p style="color: #888;">{new Date(latestPost.data.pubDate).toLocaleDateString()}</p>
+                            <p>{latestPost.data.description}</p>
                         </div>
                     </a>
                 )}
                 <div class="post-row">
                     {otherPosts.map(post => (
-                        <a href={post.url} class="post-card">
-                            <img 
-                                src={post.frontmatter.heroImage || '/assets/blog-placeholder-about.jpg'} 
-                                alt={post.frontmatter.title} 
-                                style="width: 100%; height: 140px; object-fit: cover; display: block; border-top-left-radius: 1rem; border-top-right-radius: 1rem;"
-                                class="post-image"
+                        <a href={`/blog/${post.id}/`} class="post-card">
+                            <img
+                              src={
+                                post.data.heroImage
+                                  ? typeof post.data.heroImage === 'string'
+                                    ? post.data.heroImage
+                                    : post.data.heroImage.src
+                                  : '/assets/blog-placeholder-about.jpg'
+                              }
+                              alt={post.data.title}
+                              style="width: 100%; height: 140px; object-fit: cover; display: block; border-top-left-radius: 1rem; border-top-right-radius: 1rem;"
+                              class="post-image"
                             />
                             <div style="padding: 1.5rem;">
-                                <h3 style="margin-top: 0;font-family: 'SmileySans-Oblique';">{post.frontmatter.title}</h3>
-                                <p style="color: #888;">{new Date(post.frontmatter.pubDate).toLocaleDateString()}</p>
-                                <p>{post.frontmatter.description}</p>
+                                <h3 style="margin-top: 0;font-family: 'SmileySans-Oblique';">{post.data.title}</h3>
+                                <p style="color: #888;">{new Date(post.data.pubDate).toLocaleDateString()}</p>
+                                <p>{post.data.description}</p>
                             </div>
                         </a>
                     ))}
