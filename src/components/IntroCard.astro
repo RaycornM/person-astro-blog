@@ -1,0 +1,11 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+---
+<div style="background: #fff; border-radius: 1rem; box-shadow: 0 4px 16px rgba(0,0,0,0.10); padding: 2rem; margin-bottom: 2rem;">
+  <p class="text-[#881144]" style="margin-top: 0;font-family: 'Dancing Script', cursive;">{title}</p>
+  <p class="text-[#881144]" style="font-family: 'Dancing Script', cursive;">{description}</p>
+</div>
