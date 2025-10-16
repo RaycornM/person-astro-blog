@@ -2,7 +2,25 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import IntroCard from '../components/IntroCard.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+
+// Use import.meta.glob for blog posts
+type Post = {
+  url: string;
+  frontmatter: {
+    title: string;
+    pubDate: string;
+    description: string;
+    heroImage?: string;
+  };
+};
+
+const postImports = import.meta.glob<Post>('../content/blog/*.md', { eager: true });
+const allPosts = Object.values(postImports) as Post[];
+const sortedPosts = allPosts
+  .sort((a, b) => new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime());
+const [latestPost, ...otherPosts] = sortedPosts.slice(0, 3);
 ---
 
 <!doctype html>
@@ -13,36 +31,46 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 	<body>
 		<Header />
 		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
+			<p style="text-align: center;">
+    			🍵欢迎来到日暮茶会...
+    			<br />
+    			要先来一杯红茶吗？
 			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
+			 <IntroCard title="マスカレード" description="…ようこそ。新日暮里の世界へ" />
+
+            <section>
+                <h2>最新文章</h2>
+                {latestPost && (
+                    <a href={latestPost.url} style="display: block; background: #fff; border-radius: 1rem; box-shadow: 0 4px 16px rgba(0,0,0,0.10); padding: 0; margin-bottom: 2rem; text-decoration: none; color: inherit; overflow: hidden;">
+                        <img 
+                            src={latestPost.frontmatter.heroImage || '/assets/blog-placeholder-about.jpg'} 
+                            alt={latestPost.frontmatter.title} 
+                            style="width: 100%; height: 220px; object-fit: cover; display: block; border-top-left-radius: 1rem; border-top-right-radius: 1rem;"
+                        />
+                        <div style="padding: 2rem;">
+                            <h3 style="margin-top: 0;">{latestPost.frontmatter.title}</h3>
+                            <p style="color: #888;">{new Date(latestPost.frontmatter.pubDate).toLocaleDateString()}</p>
+                            <p>{latestPost.frontmatter.description}</p>
+                        </div>
+                    </a>
+                )}
+                <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+                    {otherPosts.map(post => (
+                        <a href={post.url} style="flex: 1 1 250px; background: #fff; border-radius: 1rem; box-shadow: 0 4px 16px rgba(0,0,0,0.10); padding: 0; text-decoration: none; color: inherit; overflow: hidden;">
+                            <img 
+                                src={post.frontmatter.heroImage || '/assets/blog-placeholder-about.jpg'} 
+                                alt={post.frontmatter.title} 
+                                style="width: 100%; height: 140px; object-fit: cover; display: block; border-top-left-radius: 1rem; border-top-right-radius: 1rem;"
+                            />
+                            <div style="padding: 1.5rem;">
+                                <h3 style="margin-top: 0;">{post.frontmatter.title}</h3>
+                                <p style="color: #888;">{new Date(post.frontmatter.pubDate).toLocaleDateString()}</p>
+                                <p>{post.frontmatter.description}</p>
+                            </div>
+                        </a>
+                    ))}
+                </div>
+            </section>
 		</main>
 		<Footer />
 	</body>
