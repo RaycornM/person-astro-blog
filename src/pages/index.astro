@@ -17,6 +17,18 @@ type Post = {
   };
 };
 
+// 添加主题图片数组
+const themeImages = [
+  // 使用本地图片资源替代外部链接
+  '/assets/1d442f5857f54f17818bcb2bf6b53730.png',
+  '/assets/2025-10-17_183005_789.png',
+  '/assets/2025-10-17_185645_393.png',
+  '/assets/2025-10-17_185917_944.png',
+];
+
+// 随机选择一张图片
+const randomImage = themeImages[Math.floor(Math.random() * themeImages.length)];
+
 const posts = await getCollection('blog');
 const sortedPosts = posts
   .sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime());
@@ -25,18 +37,25 @@ const [latestPost, ...otherPosts] = sortedPosts.slice(0, 3);
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<p style="text-align: center;">
-    			🍵欢迎来到日暮茶会...
-    			<br />
-    			要先来一杯红茶吗？
-			</p>
-			 <IntroCard title="マスカレード" description="…ようこそ。新日暮里の世界へ" />
+    <head>
+        <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    </head>
+    <body>
+        <Header />
+        <main>
+            <!-- 随机轮播图 -->
+            <div class="theme-carousel">
+                <img 
+                    src={randomImage} 
+                    alt="网站主题图片" 
+                    class="carousel-image"
+                />
+            </div>
+
+            <!-- 替换原有 IntroCard 调用：让「世界へ」为主体，并在上方以注音 / 上标显示「マスカレード」 -->
+            <div class="intro-card" role="note" aria-label="intro">
+                <p class="intro-desc">…ようこそ。新日暮里の<ruby>世界へ<rt>マスカレード</rt></ruby></p>
+            </div>
 
             <section>
                 <h2 class="latest-post">最新文章</h2>
@@ -85,9 +104,9 @@ const [latestPost, ...otherPosts] = sortedPosts.slice(0, 3);
                     ))}
                 </div>
             </section>
-		</main>
-		<Footer />
-	</body>
+        </main>
+        <Footer />
+    </body>
 </html>
 
 <style>
@@ -131,5 +150,98 @@ const [latestPost, ...otherPosts] = sortedPosts.slice(0, 3);
     .post-row .post-card {
         max-width: 100%;
     }
+}
+
+.intro-card {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem auto;
+  max-width: 820px;
+  text-align: center;
+}
+.intro-title {
+  margin: 0 0 0.25rem 0;
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+.intro-title ruby {
+  ruby-position: over; /* 试用浏览器会支持的展示方式 */
+}
+.intro-title rt {
+  font-size: 0.6em;
+  display: inline-block;
+  transform: translateY(-0.25em);
+  color: rgba(0,0,0,0.6);
+  vertical-align: top;
+  margin-left: 0.25ch;
+}
+.intro-desc {
+  margin: 0.25rem 0 0;
+  color: #555;
+  line-height: 1.2;
+  font-size: 1rem;
+}
+
+/* 强制把注音显示在文字正上方 */
+.intro-desc ruby {
+  display: inline-block;
+  position: relative; /* 作为定位容器 */
+  line-height: 1;
+  vertical-align: middle;
+}
+.intro-desc rt {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, -120%); /* 把注音移到上方 */
+  display: block;
+  font-size: 0.65em;
+  white-space: nowrap;
+  color: rgba(0,0,0,0.75);
+  pointer-events: none;
+  line-height: 1;
+  z-index: 2;
+}
+
+/* 如果希望注音紧贴并居中每个单字，可以在需要的地方把主体文字拆成单字符的 ruby，例如：
+   <ruby><rb>世</rb><rt>マ</rt></ruby><ruby><rb>界</rb><rt>ス</rt></ruby><ruby><rb>へ</rb><rt>カ</rt></ruby>
+   但上面样式对整体词的注音也会居中显示。
+*/
+
+/* 保持卡片与页面整体一贯样式 */
+.post-card, .intro-card { /* 如果已有 .post-card 规则，可以只保留共有属性 */
+  transition: box-shadow 0.18s ease, transform 0.18s ease;
+}
+
+/* 轮播图样式 */
+.theme-carousel {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto 1.5rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+}
+
+.carousel-image {
+    width: 100%;
+    height: 350px; /* 设置适当的高度，可以根据需要调整 */
+    object-fit: cover; /* 保持图片比例并覆盖整个容器 */
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.carousel-image:hover {
+    transform: scale(1.03); /* 鼠标悬停时轻微放大效果 */
+}
+
+/* 响应式设计 */
+@media (max-width: 800px) {
+    .carousel-image {
+        height: 220px; /* 在移动设备上调整高度 */
+    }
+    /* 其他现有响应式样式... */
 }
 </style>
