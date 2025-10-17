@@ -26,8 +26,7 @@ const themeImages = [
   '/assets/2025-10-17_185917_944.png',
 ];
 
-// 随机选择一张图片
-const randomImage = themeImages[Math.floor(Math.random() * themeImages.length)];
+// 注意：移除服务器端的随机图片选择，改为在客户端执行
 
 const posts = await getCollection('blog');
 const sortedPosts = posts
@@ -39,14 +38,38 @@ const [latestPost, ...otherPosts] = sortedPosts.slice(0, 3);
 <html lang="en">
     <head>
         <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+        <!-- 添加客户端JavaScript以在浏览器中随机选择图片 -->
+        <!-- 修改这部分JavaScript代码 -->
+        <script>
+            // 等待DOM加载完成后执行
+            document.addEventListener('DOMContentLoaded', () => {
+                // 图片数组 - 与服务器端保持一致
+                const themeImages = [
+                    '/assets/1d442f5857f54f17818bcb2bf6b53730.png',
+                    '/assets/2025-10-17_183005_789.png',
+                    '/assets/2025-10-17_185645_393.png',
+                    '/assets/2025-10-17_185917_944.png'
+                ];
+                
+                // 在客户端随机选择一张图片
+                const randomIndex = Math.floor(Math.random() * themeImages.length);
+                const randomImage = themeImages[randomIndex];
+                
+                // 设置图片src - 添加类型断言
+                const carouselImage = document.querySelector('.carousel-image');
+                if (carouselImage instanceof HTMLImageElement) {
+                    carouselImage.src = randomImage;
+                }
+            });
+        </script>
     </head>
     <body>
         <Header />
         <main>
-            <!-- 随机轮播图 -->
+            <!-- 随机轮播图 - 初始设置第一张图片作为占位符 -->
             <div class="theme-carousel">
                 <img 
-                    src={randomImage} 
+                    src={themeImages[0]} 
                     alt="网站主题图片" 
                     class="carousel-image"
                 />
