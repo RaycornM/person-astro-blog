@@ -70,9 +70,12 @@ import Layout from '../layouts/BlogPost.astro';
         document.addEventListener('DOMContentLoaded', () => {
             // 音乐列表，每个对象包含type和id参数
             const musicList = [
-                { type: 3, id: 3061173126 }, // 您提供的第一首音乐
+                { type: 3, id: 3061173126 } , // 您提供的第一首音乐
                 { type: 3, id: 3063151261 } ,
-               { type: 3, id: 3070746499 } 
+                { type: 3, id: 3070746499 } ,
+                { type: 3, id: 3076107041 } ,
+                { type: 3, id: 3076877353 } ,
+                { type: 3, id: 3077860537 }
 				// 可以在这里添加更多音乐
                 // { type: 3, id: anotherMusicId }
             ];
@@ -82,8 +85,8 @@ import Layout from '../layouts/BlogPost.astro';
             
             // 创建iframe播放器
             const iframe = document.createElement('iframe');
-            iframe.frameBorder = 'no';
-            iframe.border = '0';
+            iframe.frameBorder = '0';
+            // 移除不支持的border属性
             iframe.marginWidth = '0';
             iframe.marginHeight = '0';
             iframe.width = '330';
@@ -101,8 +104,10 @@ import Layout from '../layouts/BlogPost.astro';
                     // 对于某些浏览器，可能需要用户交互后才能自动播放
                     // 添加这段代码作为额外的兼容处理
                     try {
-                        // 尝试通过JavaScript触发一个模拟交互
-                        iframe.contentWindow.postMessage('play', '*');
+                        // 添加null检查以修复TypeScript错误
+                        if (iframe.contentWindow) {
+                            iframe.contentWindow.postMessage('play', '*');
+                        }
                     } catch (e) {
                         console.log('无法触发自动播放:', e);
                     }
