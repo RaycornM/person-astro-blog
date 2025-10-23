@@ -5,9 +5,14 @@ pubDate: 'Mar 25 2025'
 heroImage: 'https://gh-proxy.com/https://github.com/RaycornM/person-picture-bed/blob/main/img/subbg_0005.png'
 ---
 
+import InfoBox from '/src/components/InfoBox.astro';
+import SuccessBox from '/src/components/SuccessBox.astro';
 
-### 本文只记录配置沙东卫星的过程，仅作学习探讨，不提供不传播任何资源
+<InfoBox title="">
+本文只记录配置沙东卫星的过程，仅作学习探讨，不提供不传播任何资源
+</InfoBox>
 
+<p></p>
 
 ## 准备文件
 
@@ -17,7 +22,9 @@ heroImage: 'https://gh-proxy.com/https://github.com/RaycornM/person-picture-bed/
 
 下载的包不同可能文件有些区别，可能个别有些解压完后存在“**modules**”文件夹，这是Spice自动检测的配置文件夹，使文件目录保持简洁。如果解压完的游戏没有这个文件夹，则会在根目录中存在许多不同的dll文件，例如_**soundvoltex.dll**_。
 
+<SuccessBox title="">
 如果没有**modules**文件夹又想根目录整洁一点，可以自己创建一个**modules**文件夹，将所有“.dll”文件转移进去
+</SuccessBox>
 
 ---
 
@@ -25,11 +32,13 @@ heroImage: 'https://gh-proxy.com/https://github.com/RaycornM/person-picture-bed/
 
 *如果不需要更新可以直接跳到下一步*
 
+```
 社区上传的更新包一般命名为 ：KFC-DATECODE-to-DATECODE
 
 例如：KFC-2024111900-to-2024121000
 2024111900为当前数据的版本
 2024121000为更新版本
+```
 
 1.解压更新数据内容并以与文件结构匹配的方式将文件复制到现有数据中，同意替换目标中的文件。
 
