@@ -1,6 +1,9 @@
 > 访问链接：
 https://raycornm.github.io
 
+### github链接加速：
+https://gh-proxy.com/#google_vignette
+
 # Astro Starter Kit: Blog
 
 ```sh
