@@ -1,0 +1,161 @@
+---
+title: '绿联nas qBittorrent配置指南'
+description: 'qBittorrent 是一款功能强大的开源 Bit Torrent 客户端'
+pubDate: 'Oct 14 2025'
+heroImage: 'https://ugreen-ugos-pro.oss-cn-shenzhen.aliyuncs.com/admin/article/2025-07-29/9776b4d6e8bf43be8945fb011cb5d883.webp'
+---
+import InfoBox from '/src/components/InfoBox.astro';
+
+<InfoBox title="">
+本文摘自绿联NAS官方教程中心，用作备份记录，方便查找
+</InfoBox>
+<p></p>
+
+### 应用简介
+
+qBittorrent 是一款功能强大的开源 Bit Torrent 客户端，支持磁力链接、种子下载、多任务并行、限速设置、队列管理等功能，能够满足用户在 NAS 上高效管理 BT 下载任务的需求。
+
+**默认登录信息：**
+
+● 默认账号：**admin**
+
+● 默认密码：**adminadmin**
+
+**默认端口：**
+
+● ​**Web 访问端口**：8888
+
+● ​**TCP/UDP 转发端口**：6888
+
+​**请注意**：请勿修改 WebUI 的端口，修改后会导致管理员点击 qBittorrent 应用图标跳转失效。
+
+● ​**开发者链接**​：[GitHub 项目地址](https://github.com/userdocs/qbittorrent-nox-static)
+
+### 安装指南
+
+安装 qBittorrent 应用，请按以下步骤操作：
+
+1. 打开【应用中心】找到 qBittorrent 应用，点击“安装”。
+2. ​**选择存储空间**，点击“下一步”继续。
+3. ​**选择下载目录**，通过该应用下载的文件会存储在该目录中。点击“安装”继续。
+
+### 访问 qBittorrent
+
+在系统中，用户可以通过以下方法访问 qBittorrent 应用：
+
+#### 方法一：通过应用中心访问（仅限管理员）
+
+在局域网内，管理员点击 qBittorrent 应用图标，系统将跳转至登录界面。
+
+#### 方法二：通过局域网访问（管理员和普通用户）
+
+1. 在局域网内使用http://NAS\_IP:8888访问。例如 NAS 的 IP 是172.17.70.86，在浏览器中输入http://172.17.70.86:8888进行访问。
+2. 您可以在控制面板中，找到 ​**网络设置**​，点击 ​**网络连接**，查看 NAS 设备的 IP 地址。
+
+![](https://ugreen-ugos-pro.oss-cn-shenzhen.aliyuncs.com/admin/article/2025-07-29/3db14803339b4a12af5c6dfdc54786a8.webp)
+
+#### 方法三：非局域网通过 Firefox 应用访问（仅限管理员）
+
+管理员可以通过在 NAS 系统安装的 Firefox 应用在非局域网环境中访问 qBittorrent：
+
+1. 使用 UGREEN Link 登录 NAS，打开 Firefox 应用。
+2. 登录 Firefox 后，使用http://NAS\_IP:8888访问。例如 NAS 的 IP 是172.17.70.86，在浏览器中输入http://172.17.70.86:8888进行访问。
+
+![](https://ugreen-ugos-pro.oss-cn-shenzhen.aliyuncs.com/admin/article/2025-07-29/4a5f313973474b16859fc43abd73e9ef.webp)
+
+**请注意：**
+
+1. 在不受信任的设备上登录时，建议及时清理浏览器的访问记录以确保数据安全。
+2. 在局域网访问时，建议使用兼容性较好的浏览器（如 Chrome 或 Edge）进行访问。
+3. 管理员请妥善管理访问密码，在公共网络环境下访问 NAS 时，请注意数据安全，避免泄露敏感信息。
+
+### 登录 qBittorrent
+
+在 Web 登录界面输入默认账号 admin 和密码 adminadmin 登录。​**为保证安全性，建议在首次登录后及时修改默认账号和密码（具体方法见后文《修改账号和密码》章节）。**
+
+如果遗忘登录密码，需重新安装 qBittorrent 应用。**请注意：重新安装后，应用数据将不会保留，需重新配置和添加任务。**
+
+![](https://ugreen-ugos-pro.oss-cn-shenzhen.aliyuncs.com/admin/article/2025-07-29/9776b4d6e8bf43be8945fb011cb5d883.webp)
+
+### 初始化配置
+
+在使用 qBittorrent 前，请先完成必要的初始化设置。
+
+#### 设置中文语言
+
+● 登录 WebUI 后，点击右上角的齿轮图标进入“设置”。
+
+● 在 **Behavior** 选项中找到 ​**Language**；
+
+● 从语言列表中选择 ​ **“简体中文”** ​，点击  **“Save”**  保存设置；
+
+● 保存后，界面将切换为中文，便于后续操作。
+
+![](https://ugreen-ugos-pro.oss-cn-shenzhen.aliyuncs.com/admin/article/2025-07-29/fef0c8b76906429a85b89b14fa2015c2.webp)
+
+#### 修改账号和密码
+
+为了确保安全性，请在首次登录后及时修改默认的账号和密码：
+
+1. 点击右上角的 ​ **“设置键 Options”** ，进入设置页面；
+2. 在 **WebUI** 选项下，滚动页面找到“​**验证**” 设置区，设置新的用户名和密码；
+3. 修改完成后，点击页面底部的 ​ **“保存”** ；
+4. 下次登录时需使用新的用户名和密码进行验证。
+
+![](https://ugreen-ugos-pro.oss-cn-shenzhen.aliyuncs.com/admin/article/2025-07-29/b2a0423c6b4048938ff8a7b7221a3169.webp)
+
+#### 设置监听端口
+
+1. qBittorrent 默认使用端口 6881，但该端口可能导致部分种子下载速度较慢。UGOS Pro 已默认将其更改为端口 6888。
+2. 如需使用其他端口，可在设置页面修改监听端口，点击  **“保存”**  后生效。
+
+![](https://ugreen-ugos-pro.oss-cn-shenzhen.aliyuncs.com/admin/article/2025-07-29/6b5bb17354c14bb18ce1c3356f5fb047.webp)
+
+#### 关闭 WebUI 验证功能
+
+在某些情况下（如使用内网穿透工具远程访问 qBittorrent），如果没有关闭 WebUI 验证功能，会导致访问被拒绝并提示  **“Unauthorized”**  错误。
+
+![](https://ugreen-ugos-pro.oss-cn-shenzhen.aliyuncs.com/ugreen-pro/admin/article/20250730/7c6f3556-b7a0-4f58-ab44-759bf4d400d5.png)
+
+为确保远程访问顺利进行，请按照以下步骤操作：
+
+1. 在 qbittorrent 的“设置”中切换到 WebUI 页面；
+2. 在WebUI 页面的“验证”或“安全性”相关的设置区中，关闭以下选项：
+
+● **启用点击劫持保护**
+
+● **启用跨站请求伪造 (CSRF) 保护**
+
+● **启用 Host header 属性验证**
+
+![](https://ugreen-ugos-pro.oss-cn-shenzhen.aliyuncs.com/admin/article/2025-07-29/e8dfd8dfaab1452493b2761ad7ad0ee0.webp)
+
+3. 修改完成后，点击页面底部的 ​ **“保存”** 。
+
+### 添加下载任务
+
+qBittorrent 支持多种方式添加下载任务：
+
+**1、添加磁力链接**
+
+● 点击工具栏中的  **“添加 Torrent 链接”**  图标；
+
+● 在弹出的对话框中输入磁力链接，点击“确定”即可开始下载。
+
+**2、上传种子文件**
+
+● 点击工具栏中的  **“添加 Torrent 文件”**  图标；
+
+● 选择本地种子文件上传，完成后即可下载资源。
+
+![](https://ugreen-ugos-pro.oss-cn-shenzhen.aliyuncs.com/admin/article/2025-07-29/b5856f20357b4e2c89d6f5e6118d82b3.webp)
+
+添加任务后可以看到资源已经在下载。
+
+![](https://ugreen-ugos-pro.oss-cn-shenzhen.aliyuncs.com/admin/article/2025-07-29/a71415ab925444cca9130a6c36a9a872.webp)
+
+### 为什么我的种子下载没有速度？
+
+BT下载的原理是通过其他用户上传文件给你来完成的。您的下载速度取决于这些用户的上传速度总和。如图所示有138个人在做种，但只有15个人成功连接到您，那么您的下载速度就取决于这15个人的上传速度。如果资源年代久远且没有人做种，那么下载速度就会非常慢甚至没有速度。
+
+![](https://ugreen-ugos-pro.oss-cn-shenzhen.aliyuncs.com/admin/article/2025-07-29/649370279618428a83c664b5e2ec71a5.webp)
