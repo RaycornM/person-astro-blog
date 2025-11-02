@@ -1,0 +1,164 @@
+---
+title: '绿联nas 如何申请个人 TMDB（The Movie Database）API 密钥'
+description: 'TMDB 是一个公开的影视数据库网站，提供开放的 API 申请'
+pubDate: 'Oct 20 2025'
+heroImage: 'https://ugreen-ugos-pro.oss-cn-shenzhen.aliyuncs.com/admin/article/2025-06-11/5ba7b510b7444257a04878911acaa089.png'
+---
+import InfoBox from '/src/components/InfoBox.astro';
+
+<InfoBox title="">
+本文摘自绿联NAS官方教程中心，用作备份记录，方便查找
+</InfoBox>
+<p></p>
+
+### TMDB简介
+
+TMDB（The Movie Database）是一个公开的影视数据库网站，拥有完整的电影、电视节目、演员和剧组数据，被誉为电影电视界的维基百科。所有条目都可以由用户参与创建和编辑。TMDB 提供开放的 API 申请，用户可以通过 API 获取影片的海报、简介等信息。
+
+UGOS Pro 的影视中心应用默认已配置 TMDB 数据源，无需手动输入 API 密钥，同时提供了自定义配置 TMDB API 密钥的选项。
+
+**请注意：** 如果你不熟悉 TMDB API 密钥的配置或自定义 HOST 的操作，建议保持默认设置。有特殊需求的用户可以根据实际情况在影视中心设置中配置 TMDB 数据源。
+
+#### 配置个人 API 密钥的优势
+
+1. 使用个人申请的 API 密钥可避免因公共服务限制导致的数据获取失败。
+2. 通过个人申请的 API 密钥可自定义语言、影片分级等偏好设置，获得更精准的信息。
+
+**请注意：** 使用 TMDB 获取信息应遵循其[TMDB 用户使用协议 ](https://www.themoviedb.org/terms-of-use)。
+
+### 申请 TMDB API 密钥
+
+按照以下步骤申请 TMDB API 密钥：
+
+1. 访问 [TMDB 官网 ](https://www.themoviedb.org/)并登录账号，如果没有账号，请先创建账号并登录。
+
+![](https://ugreen-ugos-pro.oss-cn-shenzhen.aliyuncs.com/admin/article/2025-06-11/5ba7b510b7444257a04878911acaa089.png)
+
+2. 登录后，点击右上角的用户头像，选择【账户设置】。
+
+![](https://ugreen-ugos-pro.oss-cn-shenzhen.aliyuncs.com/admin/article/2025-06-11/95e37091462d4215a4fd623207791366.png)
+
+3. 在账户设置中，点击左侧栏的【API】，然后点击【请求 API 密钥】的“click here”。
+
+![](https://ugreen-ugos-pro.oss-cn-shenzhen.aliyuncs.com/admin/article/2025-06-11/9c6a8feba2744d8aa1259bbeb3b4ce01.png)
+
+4. 选择以 **Developer** 身份创建。
+
+![](https://ugreen-ugos-pro.oss-cn-shenzhen.aliyuncs.com/admin/article/2025-06-11/e3997deaf7e64529a7dd4775cde7aed1.png)
+
+5. 阅读并同意使用条款，随后填写**申请信息**：
+
+● **使用类型：** 选择 **Personal**（个人）。
+
+● **应用名称：** 自定义名称，例如 **UGREEN Video Center**。
+
+● **应用 URL：** 填写你的绿联 NAS 设备 IP 地址，例如 http://192.168.1.31。你可以在绿联 NAS 的控制面板中，通过【网络设置】\>【网络连接】查看 NAS 设备的 IP 地址。
+
+● **应用简介：** 简要描述你的应用及如何使用 API，例如：
+
+```
+影视中心是一款家庭多媒体应用，申请 API 用于获取 TMDB 视频数据及海报图片，搭建精美的海报墙。
+Film and Television Center is a home multimedia application, which is used to obtain TMDB video data and poster pictures to build a beautiful poster wall.
+```
+
+● **其他个人信息：** 填写你的家庭住址等信息。这些信息将由 TMDB 保存，影视中心不会获取你的个人信息。
+
+![](https://ugreen-ugos-pro.oss-cn-shenzhen.aliyuncs.com/admin/article/2025-06-11/a9a2ce043ef24a458a324acdad12429c.png)
+
+6. 填写完成后点击“提交”，等待 TMDB 系统自动生成 API 密钥。
+
+![](https://ugreen-ugos-pro.oss-cn-shenzhen.aliyuncs.com/admin/article/2025-06-11/459217180c804c65a3679737f006b83c.png)
+
+7. 生成 API 密钥后，​**复制并妥善保存**，稍后在配置过程中会用到此地址。
+
+#### 配置 TMDB 数据源
+
+1. 打开“影视中心”应用，点击右上角的【设置】按钮，进入影视中心设置页面。
+2. 在设置页面，点击【数据源】选项。找到 **The Movie Database (TMDB)** ，点击进入 TMDB 配置界面。
+3. 在 TMDB 配置页面中，找到 **API 密钥** 输入框。将之前申请的 TMDB API 密钥粘贴到输入框中。
+4. 点击【检测】按钮，验证 API 密钥是否有效。如果检测通过，你将看到验证成功的提示。
+
+![](https://ugreen-ugos-pro.oss-cn-shenzhen.aliyuncs.com/admin/article/2025-06-11/e5bc143709014b558968975b05e4d4c7.png)
+
+5. 点击【应用】按钮，保存 TMDB 数据源的配置。
+
+#### 调整媒体库的视频信息来源
+
+1. 配置完成后，需要将媒体库的视频信息来源设置为 TMDB，以便刮削获取 TMDB 的海报和其他信息。
+2. 返回设置页，点击【媒体库】选项。
+3. 在媒体库列表中，选择需要更换数据源的媒体库。
+4. 点击媒体库右侧的【···】按钮，选择【编辑】。
+
+![](https://ugreen-ugos-pro.oss-cn-shenzhen.aliyuncs.com/admin/article/2025-06-11/3be525f9821244a38ee71b0c7950d24c.png)
+
+6. 在编辑页面中，找到【视频信息】选项。
+7. 长按可以拖动排序，将 **TMDB** 的优先级调整为最高。
+
+![](https://ugreen-ugos-pro.oss-cn-shenzhen.aliyuncs.com/admin/article/2025-06-11/4f07884606b74906822c5c222f3bfec6.png)
+
+8. 点击【应用】按钮，保存设置。
+
+#### 重新扫描媒体库
+
+1. 保存设置后，返回媒体库页面。
+2. 点击媒体库右侧的【···】按钮，选择【扫描】。
+3. 在扫描选项中，点击【扫描并全部覆盖】。这将重新扫描媒体库中的所有文件，并从 TMDB 获取最新的元数据和海报信息。
+
+![](https://ugreen-ugos-pro.oss-cn-shenzhen.aliyuncs.com/admin/article/2025-06-11/3d63b7f4ec8243ad8f43a678f7101232.png)
+
+**请注意：** 如果你的 API 密钥检测成功，通常无需配置 HOST。HOST 配置用于解析 TMDB 的正确 IP 地址，绕过 DNS 污染问题，从而确保数据源的正常访问。
+
+### 关于 TMDB
+
+#### 元数据未正确显示
+
+如果配置完成后元数据未正确显示，请尝试以下步骤：
+
+1. 确保已正确填写 TMDB API 密钥并保存设置。
+2. 检查 TMDB API 的检测是否提示连接成功。
+3. 检查 HOST 配置中填写的 IP 地址解析是否正确。
+4. 如果问题仍然存在，尝试使用“扫描全部并覆盖”手动刷新媒体库。
+
+#### 配置 TMDB 数据源是否需要额外费用
+
+TMDB 提供免费基础服务，但若需要高级功能或大规模访问（如频繁更新元数据），你需要通过 TMDB 注册账户以获取 API 密钥，并向官方了解相关使用政策。
+
+### 关于 HOST 配置
+
+TMDB 的 API 在某些区域可能会遇到DNS解析失败的情况。影视中心提供了 HOST 配置选项，允许用户通过配置解析 TMDB 的正确 IP 地址，跳过公共 DNS 的错误解析，确保数据源的正常访问。
+
+**请注意：** 配置 HOST 是为了优化 TMDB 影视信息的刮削过程，确保影视中心能够准确获取影片的元数据，如海报、简介等。绿联 NAS 本身不提供影视资源，用户需要自行管理影视文件的下载资源和存储。
+
+#### 配置 HOST 可以做什么？
+
+在使用 **“影视中心”** 时，元数据刮削功能依赖于外部的元数据服务来获取影片的详细信息。有时由于网络限制或服务提供商的问题，刮削功能可能无法正常工作。通过配置 HOST 文件，您可以指定特定的 IP 地址来解析相关的元数据服务，从而绕过可能的网络限制，确保刮削功能的顺利进行。
+
+#### 获取 TMDB 对应的 IP 地址
+
+1. 访问 [IPADDRESS.COM ](https://ipaddress.com/)。
+2. 在搜索框内输入 **api.tmdb.org** 并回车。
+
+![](https://ugreen-ugos-pro.oss-cn-shenzhen.aliyuncs.com/admin/article/2025-06-11/3339d9589f0643058566a4671a95b684.png)
+
+3. 向下滚动页面可以看到系统解析出的 ​**IP 地址**​，​**复制并妥善保存**，稍后在配置过程中会用到此地址。
+
+![](https://ugreen-ugos-pro.oss-cn-shenzhen.aliyuncs.com/admin/article/2025-06-11/764d60835489449e82aba3d336a697ca.png)
+
+#### HOST 配置方法
+
+1. 打开【影视中心】应用，点击右上角【设置】按钮，进入影视中心设置界面。
+2. 点击【数据源】，选择【The Movie Database】，将之前获取的IP地址粘贴到HOSTS配置的输入框中，确保格式正确。格式要求为：IP地址 空格 域名。
+3. 在 TMDB 配置中填写 **HOST** 对应的 IP地址+空格+域名，例如：
+
+```
+52.85.151.18 api.tmdb.org
+```
+
+4. 检查无误后，点击“导入配置”完成设置。
+5. 点击“应用”保存。
+
+![](https://ugreen-ugos-pro.oss-cn-shenzhen.aliyuncs.com/admin/article/2025-06-11/0718b9ef993544f99391ba0787a1248d.png)
+
+#### 名词解释
+
+DNS污染是指通过伪造或篡改DNS响应，使用户无法访问真实网站。
