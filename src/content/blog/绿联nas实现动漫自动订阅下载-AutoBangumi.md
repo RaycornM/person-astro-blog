@@ -159,7 +159,7 @@ AB 中配置的路径只是为了生成对应番剧文件路径，AB 本身不�
 
 - 比如 qB 中是 `/downloads`​ 那就写 `/downloads/Bangumi`​，`Bangumi`可以任意更改。
 
-  ![image](assets/image-20251014161241-ktg0jo4.png)
+  ![image](https://gh-proxy.com/https://github.com/RaycornM/person-picture-bed/blob/main/img/20251107182652311.png)
 
 ##### ​`config.json` 中的配置选项
 
