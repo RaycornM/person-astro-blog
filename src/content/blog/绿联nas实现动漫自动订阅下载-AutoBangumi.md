@@ -101,7 +101,7 @@ https://mikanani.kas.pub/RSS/MyBangumi?token=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 ![](https://gh-proxy.com/https://github.com/RaycornM/person-picture-bed/blob/main/img/20251014161934033.png)
 
-![image](assets/image-20251014162640-ssu78oz.png)
+![image](https://gh-proxy.com/https://github.com/RaycornM/person-picture-bed/blob/main/img/image-20251014162640-ssu78oz.png)
 
 ‍
 
